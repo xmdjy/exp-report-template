@@ -1,5 +1,4 @@
-//#import "@preview/xmdjy-simple-report-template:0.1.0" : *
-#import "../lib.typ" : *
+#import "@preview/xmdjy-simple-report-template:0.1.0" : *
 
 #showpage(
   course: "课程名称",

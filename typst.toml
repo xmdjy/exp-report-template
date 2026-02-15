@@ -4,9 +4,10 @@ version = "0.1.0"
 entrypoint = "lib.typ"
 authors = ["xmdjy <xmdjy703@outlook.com>"]
 license = "MIT"
-description = "简单&可定制的学校实验报告模板"
-repository = ""
+description = "A simple and customizable experimental report template for SDU students (Shandong University)."
+repository = "https://github.com/xmdjy/exp-report-template"
 keywords = ["sdu","simple","personalization"]
+exclude = ["template/fonts"]
 categories = ["report"]
 
 [template]
