@@ -1,10 +1,12 @@
 #import "@preview/cuti:0.2.1": show-cn-fakebold
+#import "@preview/codly:1.3.0": *
+#import "@preview/codly-languages:0.1.1": *
 
 #let school_title_pic = "./template/images/sdu-title-image.jpg"
 #let school_logo_pic = "./template/images/sdu-pic-image.jpg"
 #let school_title = "shandong university"
 #let main_show_pic = "./template/images/sdu-report-image.png"
-#let main_show_text = "实验报告展示"
+#let main_show_text = "实验报告正文"
 
 #let field(label, content) = (
   [
@@ -49,7 +51,7 @@
     #image(school_title_pic,width: 10.8cm)
     #text(font: "Times New Roman",size: 20pt,)[#upper(school_title)]
     #v(0.5cm)
-    #text(size: 16pt)[#underline(course) 课程实验报告]
+    #text(size: 16pt)[#underline(course) 实验报告]
     #image(school_logo_pic,width: 12cm)
     #v(0.0cm)
     #grid(
@@ -107,6 +109,7 @@
     right: 0.2cm,
     rest
   )
+  show: codly-init.with()
   set text(font : ("JetBrains Mono", "KaiTi"),size: 12pt)
   set par(
     justify: true,
@@ -151,12 +154,5 @@
     )
     v(1.5em,weak : true)
   }
-  show raw.where(block : true) : block.with(
-    fill: luma(81.81%, 74.7%), // 浅灰色背景
-    inset: 10pt,     // 内边距
-    radius: 6pt,     // 圆角
-    width: 100%,     // 宽度填满
-  )
-  show raw : set text(font: "JetBrains Mono",size : 12pt)
   body
 }
