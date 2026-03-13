@@ -31,6 +31,8 @@ exp-report/
 1、访问[typst网页版](https://typst.app/)，注册并登录
 2、点击**Start from template**，搜索模板`xmdjy-simple-report-template`
 3、选择模板并点击 **"Create"** 即可开始编辑
+
+*注：由于pr暂时没有合办，0.1.0版本还是美化之前的最老版本*
 ### 方式二：vscode本地编辑(推荐)
 #### 第一步：安装插件
 
