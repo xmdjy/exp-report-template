@@ -8,7 +8,6 @@
 - 使用typst编写模板，语法简洁，功能上不输latex，编译速度快、使用简单
 ---
 ## Preview
-## Preview
 ![1](./thumbnail.png)
 
 ---
@@ -80,6 +79,11 @@ cd template
 
 ![2](./template/images/replace.jpg)
 **经过简单替换之后达到的效果，同样适用！**
+
+## Update history
+0.1.0 version release on 2026/2/16 \
+0.1.1 version update some details and packsges on 2026/3/13
+
 ## Reference
 - [typst官网](https://typst.app/)
 - [typst中文教程](https://typst-doc-cn.github.io/docs/tutorial/)
