@@ -1,4 +1,6 @@
-#import "@preview/xmdjy-simple-report-template:0.1.0" : *
+//#import "@preview/xmdjy-simple-report-template:0.1.0" : *
+#import "../lib.typ" : *
+
 
 #showpage(
   course: "课程名称",
@@ -42,13 +44,13 @@
 )
 
 == 代码块
-```cpp
-#include<bits/stdc++.h>
-using namespace std;
-signed main(){
-  cout << "code example" << endl;
-  return 0;
-}
+#codly(languages: codly-languages)
+```python
+class ResBlock(nn.Module):
+  def __init__(self):
+
+  def forward(self,x):
+    return x
 ```
 
 == 数学公式
@@ -56,6 +58,18 @@ signed main(){
 行间公式示例：$ A = pi r^2 $ \
 更复杂一点的：$ cal(F)(omega) = integral_(-infinity)^(infinity) f(t) e^(-i omega t) d t $ \
 其他示例：$ A = mat(1, 2; 3, 4)  \ quad sum_(i=1)^n i = (n(n+1)) / 2 $ \
+
+== 类obsidan笔记框
+#idea[test contents]
+
+#warning[test contents]
+
+== 标注
+集成了高亮和注释的包，使用效果如下：\
+A simple contents test for #pin(1)pinint#pin(2).
+#pinit-highlight(1,2)
+#pinit-point-from((1,2))[It is simple.] \
+\
 
 == 文献引用
 在给出的ref.bib中添加需要引用的文献，然后在文中使用 \

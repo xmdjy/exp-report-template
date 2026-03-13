@@ -1,6 +1,9 @@
 #import "@preview/cuti:0.2.1": show-cn-fakebold
 #import "@preview/codly:1.3.0": *
 #import "@preview/codly-languages:0.1.1": *
+#import "@preview/gentle-clues:1.3.0": *
+#import "@preview/lovelace:0.3.0": *
+#import "@preview/pinit:0.2.2": *
 
 #let school_title_pic = "./template/images/sdu-title-image.jpg"
 #let school_logo_pic = "./template/images/sdu-pic-image.jpg"
