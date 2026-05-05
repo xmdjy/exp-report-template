@@ -19,7 +19,7 @@
       stroke: (bottom: white + 0.5pt), 
       inset: (top: 0pt, bottom: 5pt),
     )[
-      #set text(font: ("KaiTi"))
+      #set text(font: ("KaiTi", "Kaiti SC", "STKaiti"))
       #text(size: 16pt)[#label]
     ]
   ],
@@ -30,7 +30,7 @@
       stroke: (bottom: 0.5pt), 
       inset: (top: 0pt, bottom: 5pt),
     )[
-      #set text(font: ("Times New Roman", "KaiTi"), size: 16pt)
+      #set text(font: ("Times New Roman", "KaiTi", "Kaiti SC", "STKaiti"), size: 16pt)
       #set par(first-line-indent: 0pt, leading: 0em)
       #content
     ]
@@ -54,7 +54,7 @@
     #image(school_title_pic,width: 10.8cm)
     #text(font: "Times New Roman",size: 20pt,)[#upper(school_title)]
     #v(0.5cm)
-    #text(size: 16pt)[#underline(course) 实验报告]
+    #text(size: 16pt)[#underline(stroke: 0.8pt, offset: 3pt, evade: false)[#course] 实验报告]
     #image(school_logo_pic,width: 12cm)
     #v(0.0cm)
     #grid(
@@ -78,7 +78,7 @@
     numbering : none,
     header-ascent: 0.0cm,
     header: [
-      #set text(font: ("Times New Roman", "KaiTi"),size: 18pt)
+      #set text(font: ("Times New Roman", "KaiTi", "Kaiti SC", "STKaiti"),size: 18pt)
       #grid(
         columns: (1fr,1fr),
         align: bottom,
@@ -99,7 +99,7 @@
       )
     ],
     footer: align(center)[
-      #set text(font: ("Times New Roman", "KaiTi"),size: 16pt)
+      #set text(font: ("Times New Roman", "KaiTi", "Kaiti SC", "STKaiti"),size: 16pt)
       #context[
          #counter(page).display("1") 
       ]
@@ -113,7 +113,7 @@
     rest
   )
   show: codly-init.with()
-  set text(font : ("JetBrains Mono", "KaiTi"),size: 12pt)
+  set text(font : ("JetBrains Mono", "KaiTi", "Kaiti SC", "STKaiti"),size: 12pt)
   set par(
     justify: true,
     leading: 1.2em, //行间距
@@ -126,36 +126,26 @@
     }
     it
   }
-  set heading(numbering: "一 I")
+  set heading(numbering: "1.1.1")
   show heading : it => {
-    let nums = if it.numbering != none { counter(heading).at(it.location()) } else {none}
-    let font_pattern = ""
-    let title_size = 12pt
-    let numbering_str = none
-    if it.level == 1 {
-      font_pattern = ("Times New Roman", "KaiTi")
-      title_size = 16pt
-      numbering_str = numbering("一",..nums)
-      //colbreak(weak : true)
-    }else{
-      font_pattern = ("Times New Roman", "KaiTi")
-      if nums != none {
-        nums = nums.slice(1)
-        numbering_str = numbering("I",..nums)
-      }
-    }
-    set text(font : font_pattern,size : title_size,weight : "bold")
+    let title_size = if it.level == 1 { 16pt }
+      else if it.level == 2 { 14pt }
+      else { 12pt }
+    let numbering_str = if it.numbering != none {
+      numbering(it.numbering, ..counter(heading).at(it.location()))
+    } else { none }
+    set text(font : ("Times New Roman", "KaiTi", "Kaiti SC", "STKaiti"), size : title_size, weight : "bold")
     if it.level > 1 {
-      v(2em,weak : true)
+      v(2em, weak : true)
     }
     grid(
-      columns: (auto,1fr),
+      columns: (auto, 1fr),
       column-gutter: 0.6em,
       align : bottom,
       [#numbering_str],
       [#it.body]
     )
-    v(1.5em,weak : true)
+    v(1.5em, weak : true)
   }
   body
 }
