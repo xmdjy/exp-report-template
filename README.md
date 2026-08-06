@@ -5,13 +5,13 @@
 **告别繁琐排版，把时间留给实验本身。**
 
 一套简洁、现代、开箱即用的中文实验报告模板<br>
-为山东大学课程实验设计，也支持快速替换为任意学校主题
+专为山东大学课程实验设计
 
 [![Typst](https://img.shields.io/badge/Typst-template-239DAD?logo=typst&logoColor=white)](https://typst.app/)
 [![Version](https://img.shields.io/badge/version-0.1.1-blue)](https://github.com/xmdjy/exp-report-template)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
-[快速开始](#-快速开始) · [功能亮点](#-功能亮点) · [自定义主题](#-自定义学校主题) · [查看示例 PDF](./template/main.pdf)
+[快速开始](#-快速开始) · [功能亮点](#-功能亮点) · [查看示例 PDF](./template/main.pdf)
 
 </div>
 
@@ -23,7 +23,6 @@
 - **统一的报告版式**：自动处理页眉、页脚、页码、标题编号与正文间距
 - **丰富的内容组件**：支持图片、表格、数学公式、代码高亮、提示框与重点标注
 - **规范的文献引用**：内置 BibTeX 工作流和 GB/T 7714 数字引用样式
-- **学校主题可定制**：替换校名、校徽和页眉素材，即可适配其他院校
 - **Typst 极速编译**：语法清晰，实时预览，适合课程作业与实验报告的快速迭代
 
 ## 🚀 快速开始
@@ -114,35 +113,13 @@ def hello_typst():
 ```
 ````
 
-## 🎨 自定义学校主题
-
-编辑 `lib.typ` 顶部的主题配置，即可替换学校视觉元素：
-
-```typst
-#let school_title_pic = "./assets/sdu-title-image.jpg"
-#let school_logo_pic = "./assets/sdu-pic-image.jpg"
-#let school_title = "shandong university"
-#let main_show_pic = "./assets/sdu-report-image-gray.png"
-```
-
-| 配置项 | 用途 |
-| --- | --- |
-| `school_title_pic` | 封面学校中文名称图片 |
-| `school_logo_pic` | 封面校徽或主题图片 |
-| `school_title` | 学校英文名称 |
-| `main_show_pic` | 正文页眉居中图片 |
-
-学校主题素材统一放在根目录的 `assets/`；报告正文中使用的图片资源统一放在根目录的 `images/`。从 `template/main.typ` 引用时，路径写作 `../images/文件名`。
-
-![更换学校素材后的效果](./assets/replace.jpg)
-
 ## 📁 项目结构
 
 ```text
 exp-report-template/
 ├── assets/                 # 学校标识与模板内置图片素材
 ├── images/                 # 用户报告中使用的图片资源
-├── lib.typ                 # 模板核心与主题配置
+├── lib.typ                 # 模板核心样式与排版配置
 ├── thumbnail.png           # 模板预览图
 ├── typst.toml              # Typst 包信息
 └── template/
@@ -170,7 +147,7 @@ exp-report-template/
 
 ## 🤝 参与改进
 
-如果模板对你有帮助，欢迎点一个 ⭐ Star。遇到排版问题、希望支持新的报告样式，或想分享自己的学校主题，也欢迎提交 Issue 或 Pull Request。
+如果模板对你有帮助，欢迎点一个 ⭐ Star。遇到排版问题、希望支持新的报告样式，也欢迎提交 Issue 或 Pull Request。
 
 ## 📚 相关资源
 
