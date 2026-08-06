@@ -26,25 +26,38 @@
   + 有序2
 == 插入图片
 #figure(
-  image("images/exp.png",width : 75%),
+  image("../assets/exp.png",width : 75%),
   caption : [图片的说明],
 )
 
 
 == 插入表格
+实验流程与主要内容如 @tab:workflow 所示。
+
 #figure(
   table(
-    columns : 3,
-    align : center,
-    [*阶段*],[*研究内容*],[*应用*],
-    [content1],[content2],[content3],
-    [111],[222],[333],
+    columns: (1fr, 2fr, 1fr),
+    align: center,
+    inset: (x: 12pt, y: 6pt),
+    stroke: none,
+
+    table.hline(stroke: 1.2pt),
+    table.header(
+      [*阶段*], [*研究内容*], [*应用*],
+    ),
+    table.hline(stroke: 0.6pt),
+
+    [需求分析], [明确实验目标与约束], [方案设计],
+    [实验验证], [记录并分析实验数据], [结果评估],
+
+    table.hline(stroke: 1.2pt),
   ),
-  caption : [表格说明],
-)
+  caption: [实验流程与主要内容],
+  supplement: [表],
+) <tab:workflow>
 
 == 代码块
-#codly(languages: codly-languages)
+#codly(languages: codly-languages, breakable: false)
 ```python
 class ResBlock(nn.Module):
   def __init__(self):
@@ -72,8 +85,12 @@ A simple contents test for #pin(1)pinint#pin(2).
 \
 
 == 文献引用
-在给出的ref.bib中添加需要引用的文献，然后在文中使用 \
-[ICIR2025]Think Then React 动作生成的新思路 @tan2025think 
-#bibliography("ref.bib", style: "gb-7714-2015-numeric",title : "参考文献")
+将文献条目添加到 `ref.bib`，然后通过 `@引用键` 在正文中引用。例如，AndroidWorld 提供了一个面向自主智能体的动态基准测试环境 @rawles2024androidworlddynamicbenchmarkingenvironment。
+
+#bibliography(
+  "ref.bib",
+  style: "gb-7714-2015-numeric",
+  title: "参考文献",
+)
 
 ]

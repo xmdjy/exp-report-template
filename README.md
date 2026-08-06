@@ -1,96 +1,189 @@
-*A simple experiment report template for typst*
-简单、通用的实验报告模板，使用typst制作
+<div align="center">
 
----
-- 该模板在主题页设置了鲜明的关于学校信息的元素，适合学校课程的实验报告来使用，集成了封面生成、自动化排版、代码块高亮、文献引用等功能，便捷美观
-- 模板默认学校为山东大学，同时接受其他学校的自定义设置，修改方法见下文
-- 使用typst编写模板，语法简洁，功能上不输latex，编译速度快、使用简单
-- 使用typst编写模板，语法简洁，功能上不输latex，编译速度快、使用简单
----
-## Preview
-![1](./thumbnail.png)
+# Typst 实验报告模板
 
----
-## Usage
-### 使用前请确保安装了以下字体：
-- 宋体、楷体、黑体
-- JetBrains Mono 
-[Get JetBrains Mono and insatll](https://www.jetbrains.com/ja-jp/lp/mono/)
-### 项目结构说明
-```text
-exp-report/
-├── lib.typ         # 模板文件，可进行定制修改
-└── template/
-    ├── main.typ     # 你的报告正文文件
-    |—— ref.bib      # 参考文献引用
-    └── images/      # 模板图片资源目录，以及你的报告需要用的图片
-```
+**告别繁琐排版，把时间留给实验本身。**
 
-## Quick start
-### 方式一：使用typst web编辑器(最简单)
-1、访问[typst网页版](https://typst.app/)，注册并登录
-2、点击**Start from template**，搜索模板`xmdjy-simple-report-template`
-3、选择模板并点击 **"Create"** 即可开始编辑
+一套简洁、现代、开箱即用的中文实验报告模板<br>
+为山东大学课程实验设计，也支持快速替换为任意学校主题
 
-*注：由于pr暂时没有合办，0.1.0版本还是美化之前的最老版本*
-### 方式二：vscode本地编辑(推荐)
-#### 第一步：安装插件
+[![Typst](https://img.shields.io/badge/Typst-template-239DAD?logo=typst&logoColor=white)](https://typst.app/)
+[![Version](https://img.shields.io/badge/version-0.1.1-blue)](https://github.com/xmdjy/exp-report-template)
+[![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
-在 VS Code 中安装 [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) 插件
+[快速开始](#-快速开始) · [功能亮点](#-功能亮点) · [自定义主题](#-自定义学校主题) · [查看示例 PDF](./template/main.pdf)
 
-- 提供语法高亮、智能补全、错误检查
-- 支持实时 PDF 预览和导出
-#### 第二步：下载模板
+</div>
+
+![最新模板效果：封面与正文预览](./thumbnail.png)
+
+## ✨ 功能亮点
+
+- **开箱即用的封面**：课程、学院、班级、姓名、学号等信息一处填写
+- **统一的报告版式**：自动处理页眉、页脚、页码、标题编号与正文间距
+- **丰富的内容组件**：支持图片、表格、数学公式、代码高亮、提示框与重点标注
+- **规范的文献引用**：内置 BibTeX 工作流和 GB/T 7714 数字引用样式
+- **学校主题可定制**：替换校名、校徽和页眉素材，即可适配其他院校
+- **Typst 极速编译**：语法清晰，实时预览，适合课程作业与实验报告的快速迭代
+
+## 🚀 快速开始
+
+### 方式一：克隆项目（推荐）
+
+确保已经安装 [Typst](https://github.com/typst/typst)；如果使用 VS Code，推荐安装 [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) 扩展，以获得语法高亮、自动补全和实时 PDF 预览。
+
 ```bash
-git clone https://github.com/xmdjy/exp-report-template
-cd template
+git clone https://github.com/xmdjy/exp-report-template.git
+cd exp-report-template
+typst compile --root . template/main.typ
 ```
-新建typst文件并导入模板
+
+打开 `template/main.typ`，填写封面信息并开始写作：
+
 ```typst
-#import "@preview/xmdjy-simple-report-template:0.1.0" : *
+#import "../lib.typ": *
+
 #showpage(
   course: "课程名称",
-  college: "学院名",
-  author : "名字",
+  college: "学院名称",
+  class: "班级",
+  author: "姓名",
   stdid: "学号",
-  title: "实验名",
-  class: "班级"
+  title: "实验名称",
 )
+
 #reportpage[
-    //正文内容
+  = 实验目的
+
+  在这里开始撰写你的实验报告。
 ]
 ```
-随后按照你的需要自行修改即可
-## Customization
-即便你不是山东大学的学生，依旧可以通过修改模板中的一些信息达到简单的定制效果，在`lib.typ`中修改全局变量并放入你的学校相关图片即可，具体方法如下：
+
+### 方式二：作为 Typst 包使用
+
+如果该版本已发布至 Typst Universe，可在项目中直接导入：
+
 ```typst
-#let school_title_pic = "./template/images/sdu-title-image.jpg"
-#let school_logo_pic = "./template/images/sdu-pic-image.jpg"
-#let school_title = "shandong university"
-#let main_show_pic = "./template/images/sdu-report-image.png"
-#let main_show_text = "实验报告展示"
+#import "@preview/xmdjy-simple-report-template:0.1.1": *
 ```
-- `school_title_pic`：学校中文名图片
-- `school_logo_pic`：学校校徽图片
-- `school_title`：学校英文全拼
-- `main_show_pic`：正文部分左上角图标，建议学校图标+中&拼图片
-- `main_show_text`：正文右上角文字，可以写与你的实验报告相关的内容
 
-**注：请将上述图片放在./template/images目录下，修改时只需要改图片的文件名即可
-如果修改好排版不太协调，请尝试修改$v()$中的间隔参数**
+随后使用与上方相同的 `#showpage(...)` 和 `#reportpage[...]` 即可。
 
-![2](./template/images/replace.jpg)
-**经过简单替换之后达到的效果，同样适用！**
+## 🧩 常用内容
 
-## Update history
-0.1.0 version release on 2026/2/16 \
-0.1.1 version update some details and packsges on 2026/3/13
+模板已经配置好常见实验报告元素：
 
-## Reference
-- [typst官网](https://typst.app/)
-- [typst中文教程](https://typst-doc-cn.github.io/docs/tutorial/)
-- [小蓝书](https://typst-doc-cn.github.io/tutorial/)
-- [南京大学-并不复杂的Typst讲座](https://www.bilibili.com/video/BV1AJ4m1j7Sa)
-- [上海交通大学本科生毕业设计（论文）中期检查报告-模板](https://github.com/zh1-z/SJTU-Bachelor-Thesis-Midterm-Typst-Template)
+```typst
+// 图片
+#figure(
+  image("../images/example.png", width: 75%),
+  caption: [实验流程图],
+)
 
-**感谢以上资源对模板开发的帮助！**
+// 三线表
+#table(
+  columns: (1fr, 2fr, 1fr),
+  stroke: none,
+  table.hline(stroke: 1.2pt),
+  table.header([*阶段*], [*研究内容*], [*应用*]),
+  table.hline(stroke: 0.6pt),
+  [需求分析], [明确实验目标与约束], [方案设计],
+  [实验验证], [记录并分析实验数据], [结果评估],
+  table.hline(stroke: 1.2pt),
+)
+
+// 数学公式
+$ E = m c^2 $
+
+// 提示框
+#idea[记录一个关键思路。]
+#warning[标注实验中的注意事项。]
+
+// 文献引用
+相关工作可参考 @rawles2024androidworlddynamicbenchmarkingenvironment。
+#bibliography("ref.bib", style: "gb-7714-2015-numeric", title: "参考文献")
+```
+
+代码块会自动启用语法高亮：
+
+````typst
+#codly(languages: codly-languages)
+```python
+def hello_typst():
+    print("Hello, Typst!")
+```
+````
+
+## 🎨 自定义学校主题
+
+编辑 `lib.typ` 顶部的主题配置，即可替换学校视觉元素：
+
+```typst
+#let school_title_pic = "./assets/sdu-title-image.jpg"
+#let school_logo_pic = "./assets/sdu-pic-image.jpg"
+#let school_title = "shandong university"
+#let main_show_pic = "./assets/sdu-report-image-gray.png"
+```
+
+| 配置项 | 用途 |
+| --- | --- |
+| `school_title_pic` | 封面学校中文名称图片 |
+| `school_logo_pic` | 封面校徽或主题图片 |
+| `school_title` | 学校英文名称 |
+| `main_show_pic` | 正文页眉居中图片 |
+
+学校主题素材统一放在根目录的 `assets/`；报告正文中使用的图片资源统一放在根目录的 `images/`。从 `template/main.typ` 引用时，路径写作 `../images/文件名`。
+
+![更换学校素材后的效果](./assets/replace.jpg)
+
+## 📁 项目结构
+
+```text
+exp-report-template/
+├── assets/                 # 学校标识与模板内置图片素材
+├── images/                 # 用户报告中使用的图片资源
+├── lib.typ                 # 模板核心与主题配置
+├── thumbnail.png           # 模板预览图
+├── typst.toml              # Typst 包信息
+└── template/
+    ├── main.typ            # 示例报告与写作入口
+    ├── main.pdf            # 编译后的示例 PDF
+    └── ref.bib             # BibTeX 参考文献
+```
+
+## 🔤 推荐字体
+
+为获得与预览图一致的效果，建议安装：
+
+- Songti SC（中文正文）
+- Heiti SC（中文标题）
+- Kaiti SC（封面信息）
+- Times New Roman（英文正文）
+- JetBrains Mono（可选，用于代码块）
+
+[下载 JetBrains Mono](https://www.jetbrains.com/lp/mono/)
+
+## 📌 版本记录
+
+- `0.1.1` — 优化模板细节与依赖包（2026-03-13）
+- `0.1.0` — 首个公开版本（2026-02-16）
+
+## 🤝 参与改进
+
+如果模板对你有帮助，欢迎点一个 ⭐ Star。遇到排版问题、希望支持新的报告样式，或想分享自己的学校主题，也欢迎提交 Issue 或 Pull Request。
+
+## 📚 相关资源
+
+- [Typst 官网](https://typst.app/)
+- [Typst 中文文档](https://typst-doc-cn.github.io/docs/)
+- [Typst 中文教程“小蓝书”](https://typst-doc-cn.github.io/tutorial/)
+- [南京大学：并不复杂的 Typst 讲座](https://www.bilibili.com/video/BV1AJ4m1j7Sa)
+- [上海交通大学本科生毕业设计中期检查报告模板](https://github.com/zh1-z/SJTU-Bachelor-Thesis-Midterm-Typst-Template)
+
+<div align="center">
+
+**写得更快，排得更好。**
+
+Made with Typst · Released under the [MIT License](./LICENSE)
+
+</div>
