@@ -1,4 +1,4 @@
-#import "@preview/cuti:0.2.1": show-cn-fakebold
+#import "@preview/cuti:0.2.1": cn-fakebold, show-cn-fakebold
 #import "@preview/codly:1.3.0": *
 #import "@preview/codly-languages:0.1.1": *
 #import "@preview/gentle-clues:1.3.0": *
@@ -53,6 +53,7 @@
     margin: (top: 2.12cm,bottom: 3cm,left: 1cm,right: 1cm),
     numbering: none,
   )
+  set text(lang: "zh", region: "cn")
   show: show-cn-fakebold
   align(center)[
     #image(school_title_pic,width: 10.8cm)
@@ -65,7 +66,7 @@
       columns: (80pt, 180pt),
       column-gutter: 0em,
       row-gutter: 10pt,
-      ..field([主#h(2em)题],title),
+      ..field([主#h(2em)题:],title),
       ..field([学#h(2em)院:],college),
       ..field([班#h(2em)级:],class),
       ..field([姓#h(2em)名:], author),
@@ -106,10 +107,14 @@
       ]
     ],
   )
+  // 封面占用第 1 页，正文重新从 1 开始编号
+  counter(page).update(1)
   show: codly-init.with()
   set text(
     font: _body_font,
     size: 12pt,
+    lang: "zh",
+    region: "cn",
     top-edge: 0.8em,
     bottom-edge: -0.2em,
   )
@@ -118,13 +123,26 @@
     leading: 0.25em, // 约 1.25 倍行距
     spacing: 1.5em, //段间距
   )
-  show strong: set text(stroke: 0.02857em)
+  // 中文无粗体字面，用描边模拟；只作用于汉字，且描边颜色跟随文字颜色
+  show strong: cn-fakebold
   show emph: it => {
     show regex("[\p{Unified_Ideograph}\p{Punctuation}]"): char => {
       box(skew(ax: -12deg, char))
     }
     it
   }
+  // 中文字体的 subs/sups 特性对汉字会退化成零宽字形，改用缩放+基线偏移
+  // size / baseline 默认是 auto（由字体度量决定），此处回落到 Typst 的经典取值
+  show sub: it => text(
+    size: if it.size == auto { 0.6em } else { it.size },
+    baseline: if it.baseline == auto { 0.2em } else { it.baseline },
+    it.body,
+  )
+  show super: it => text(
+    size: if it.size == auto { 0.6em } else { it.size },
+    baseline: if it.baseline == auto { -0.5em } else { it.baseline },
+    it.body,
+  )
   set heading(numbering: "1.1.1")
   show heading : it => {
     let title_size = if it.level == 1 { 16pt }
@@ -137,13 +155,19 @@
     if it.level > 1 {
       v(0.75em, weak: true)
     }
-    grid(
-      columns: (auto, 1fr),
-      column-gutter: 0.6em,
-      align : bottom,
-      [#numbering_str],
-      [#it.body]
-    )
+    // 无编号标题（如 bibliography / outline 的标题）不能保留空的编号列，
+    // 否则会平白多出一个 column-gutter 宽度的缩进
+    if numbering_str == none {
+      it.body
+    } else {
+      grid(
+        columns: (auto, 1fr),
+        column-gutter: 0.6em,
+        align : bottom,
+        [#numbering_str],
+        [#it.body]
+      )
+    }
     v(0.65em, weak: true)
   }
   body

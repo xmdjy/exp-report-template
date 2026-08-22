@@ -8,10 +8,10 @@
 专为山东大学课程实验设计
 
 [![Typst](https://img.shields.io/badge/Typst-template-239DAD?logo=typst&logoColor=white)](https://typst.app/)
-[![Version](https://img.shields.io/badge/version-0.1.1-blue)](https://github.com/xmdjy/exp-report-template)
+[![Version](https://img.shields.io/badge/version-0.1.1-blue)](https://github.com/xmdjy/sdu-report-template)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
-[快速开始](#-快速开始) · [功能亮点](#-功能亮点) · [查看示例 PDF](./template/main.pdf)
+[快速开始](#-快速开始) · [功能亮点](#-功能亮点) · [查看示例 PDF](./examples/demo.pdf)
 
 </div>
 
@@ -32,15 +32,15 @@
 确保已经安装 [Typst](https://github.com/typst/typst)；如果使用 VS Code，推荐安装 [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) 扩展，以获得语法高亮、自动补全和实时 PDF 预览。
 
 ```bash
-git clone https://github.com/xmdjy/exp-report-template.git
-cd exp-report-template
-typst compile --root . template/main.typ
+git clone https://github.com/xmdjy/sdu-report-template.git
+cd sdu-report-template
+typst compile --root . examples/demo.typ
 ```
 
-打开 `template/main.typ`，填写封面信息并开始写作：
+`examples/demo.typ` 是完整的功能演示，编译它可以先看看模板长什么样。写自己的报告时，在仓库里新建一个文件（例如 `report.typ`），引用 `lib.typ` 即可：
 
 ```typst
-#import "../lib.typ": *
+#import "./lib.typ": *
 
 #showpage(
   course: "课程名称",
@@ -60,10 +60,16 @@ typst compile --root . template/main.typ
 
 ### 方式二：作为 Typst 包使用
 
-如果该版本已发布至 Typst Universe，可在项目中直接导入：
+如果该版本已发布至 Typst Universe，可以直接创建一个新项目：
+
+```bash
+typst init @preview/xmdjy-sdu-report-template
+```
+
+生成的目录里 `main.typ` 已经写好骨架，`ref.bib` 用于参考文献。也可以在已有项目中直接导入：
 
 ```typst
-#import "@preview/xmdjy-simple-report-template:0.1.1": *
+#import "@preview/xmdjy-sdu-report-template:0.1.1": *
 ```
 
 随后使用与上方相同的 `#showpage(...)` 和 `#reportpage[...]` 即可。
@@ -116,15 +122,17 @@ def hello_typst():
 ## 📁 项目结构
 
 ```text
-exp-report-template/
+sdu-report-template/
 ├── assets/                 # 学校标识与模板内置图片素材
 ├── images/                 # 用户报告中使用的图片资源
 ├── lib.typ                 # 模板核心样式与排版配置
 ├── thumbnail.png           # 模板预览图
 ├── typst.toml              # Typst 包信息
-└── template/
-    ├── main.typ            # 示例报告与写作入口
-    ├── main.pdf            # 编译后的示例 PDF
+├── examples/
+│   ├── demo.typ            # 完整功能演示（引用 ../lib.typ）
+│   └── demo.pdf            # 演示的编译结果
+└── template/               # typst init 生成的起始文件
+    ├── main.typ            # 报告骨架（引用已发布的包）
     └── ref.bib             # BibTeX 参考文献
 ```
 
